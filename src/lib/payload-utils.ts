@@ -6,7 +6,8 @@ export const getServerSideUser = async (
   cookies: NextRequest['cookies'] | ReadonlyRequestCookies
 ) => {
   const token = cookies.get('payload-token')?.value
-
+  console.log("here")
+  console.log(token)
   const meRes = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/me`,
     {
@@ -15,10 +16,11 @@ export const getServerSideUser = async (
       },
     }
   )
+  console.log(await meRes.text())
+  
+  // const { user } = (await meRes.json()) as {
+  //   user: User | null
+  // }
 
-  const { user } = (await meRes.json()) as {
-    user: User | null
-  }
-
-  return { user }
+  return { user:null }
 }
