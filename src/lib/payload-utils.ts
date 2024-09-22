@@ -18,9 +18,9 @@ export const getServerSideUser = async (
   )
   console.log(await meRes.text())
   
-  // const { user } = (await meRes.json()) as {
-  //   user: User | null
-  // }
+  const { user } = ({user:null}) as {
+    user: User | null
+  }
 
-  return { user:null }
+  return { user }
 }
