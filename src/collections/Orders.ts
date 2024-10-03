@@ -15,7 +15,7 @@ export const Orders: CollectionConfig = {
   admin: {
     useAsTitle: 'Your Orders',
     description:
-      'A summary of all your orders on DigitalHippo.',
+      'A summary of all your orders  on DigitalHippo.',
   },
   access: {
     read: yourOwn,
@@ -28,7 +28,7 @@ export const Orders: CollectionConfig = {
       name: '_isPaid',
       type: 'checkbox',
       access: {
-        read: ({ req }) => req.user.role === 'admin',
+        read: ({ req }) => true,
         create: () => false,
         update: () => false,
       },

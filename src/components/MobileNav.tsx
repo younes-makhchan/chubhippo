@@ -6,8 +6,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { cookies } from 'next/headers'
+import { getServerSideUser } from '@/lib/payload-utils'
+import UserAccountNav from './UserAccountNav'
+import { User } from '../payload-types'
 
-const MobileNav = () => {
+const MobileNav =({user}:{user:User | null}) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
   const pathname = usePathname()
@@ -102,20 +106,26 @@ const MobileNav = () => {
 
             <div className='space-y-6 border-t border-gray-200 px-4 py-6'>
               <div className='flow-root'>
+              { user ? null : (
                 <Link
                   onClick={() => closeOnCurrent('/sign-in')}
                   href='/sign-in'
                   className='-m-2 block p-2 font-medium text-gray-900'>
                   Sign in
                 </Link>
+                      )}
               </div>
               <div className='flow-root'>
+              {user ? (
+                 <UserAccountNav user={user} />
+                  ) : (
                 <Link
                   onClick={() => closeOnCurrent('/sign-up')}
                   href='/sign-up'
                   className='-m-2 block p-2 font-medium text-gray-900'>
                   Sign up
                 </Link>
+                  )}
               </div>
             </div>
           </div>
